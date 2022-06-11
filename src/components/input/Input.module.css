@@ -1,0 +1,14 @@
+.customInput {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.customInput>input {
+  border: 2px solid var(--main-accent-color);
+  background-color: var(--main-accent-light);
+  border-radius: var(--border-radius);
+  padding: 10px;
+  margin: 10px;
+}

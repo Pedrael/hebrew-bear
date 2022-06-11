@@ -1,0 +1,27 @@
+/* .layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #9ed1c0;
+} */
+
+.aside {
+    min-width: 200px;
+    width: 200px;
+    background: #d0d0d0;
+    display: flex;
+    flex-direction: column;
+}
+
+.asideButton {
+    width: 100%;
+    font-size: 16px;
+    font-style: normal;
+    text-decoration: none;
+    color: inherit;
+    border: none;
+    cursor: pointer;
+    padding: 10px 0;
+}
