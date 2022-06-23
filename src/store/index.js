@@ -8,14 +8,17 @@ import {composeWithDevTools} from "redux-devtools-extension";
 
 const defaultState = {
   binyanim: {
-    'pa`al': 'פָּעַל',
-    'hiph`il': 'הִפְעִיל',
-    'pi`el': 'פִּעֵל',
-    'hitpael': 'הִתְפַּעֵל'
+    'Pa`al': 'פָּעַל',
+    'Hiph`il': 'הִפְעִיל',
+    'Pi`el': 'פִּעֵל',
+    'Hitpael': 'הִתְפַּעֵל', 
   },
   verbs: [
-    {root: 'פעל', translate: 'work'}
-  ]
+    {root: 'פעל', translate: 'work', type: 'noun'},
+    {root: 'פעל', translate: 'work', type: 'notnoun'}
+  ],
+  types: ['Pa`al', 'Hiph`il', 'Pi`el', 'Hitpael', 'Noun'],
+  title: ['ROOT', 'TRANSLATE', 'TYPE', 'PRESENT', 'PAST', 'FUTURE']
 }
 
 const ADD_VERB = "ADD_VERB";
@@ -24,7 +27,7 @@ const reducer = (state = defaultState, action) => {
   switch(action.type) {
 
     case ADD_VERB: {
-      return {...state, verbs: [...state, action.payload] }
+      return {...state, verbs: [...state.verbs, action.payload] }
     }
 
     default: return state;
