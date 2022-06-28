@@ -2,8 +2,9 @@
 
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import classes from './Words.module.css';
+import classes from '../../styles/index.module.css';
 
 import Word from '../../models/Words.js';
 import {addVerbAction} from '../../store/index.js';
@@ -43,7 +44,7 @@ const Words = () => {
                     <td>{row.translate}</td>
                     <td>{row.type}</td>
                     <td>
-                        {row.type != 'noun' ? <button>Present</button> : <></>}
+                        {row.type != 'noun' ? <Link to={`/conjugation/present/${row.root}/${row.type}`}>Present</Link> : <></>}
                     </td>
                     <td>
                         {row.type != 'noun' ? <button>Past</button> : <></>}

@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import { Link, Route, Routes } from "react-router-dom";
 
 import Words from "../words/Words.jsx";
+import Conjugation from '../conjugation/Conjugation';
 
 const General = () => {
 
@@ -13,19 +14,10 @@ const General = () => {
 
   return (
     <div className={classes.generalLayout}>
-      {/* <aside className={classes.aside}>
-        <Link to="/verbs" className={classes.asideButton}>Verbs</Link>
-        <Link to="/verbs/paal" className={classes.asideButton}>Pa`al</Link>
-        <Link to="/nouns" className={classes.asideButton}>Nouns</Link>
-      </aside>
-      <main>
       <Routes>
-        <Route path="verbs" element={<Words></Words>} />
-        <Route path="verbs/paal" element={<p>Pa`al</p>} />
-        <Route path="nouns" element={<p>Nouns</p>} />
+        <Route path="" element={<Words></Words>} />
+        <Route path="conjugation/:tense/:root/:type" element={<Conjugation></Conjugation>} />
       </Routes>
-      </main> */}
-      <Words></Words>
     </div>
   )
 }

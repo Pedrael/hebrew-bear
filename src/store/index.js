@@ -13,11 +13,12 @@ const defaultState = {
     'Pi`el': 'פִּעֵל',
     'Hitpael': 'הִתְפַּעֵל', 
   },
+  types: ['Pa`al', 'Hiph`il', 'Pi`el', 'Hitpael', 'Noun'],
   verbs: [
     {root: 'פעל', translate: 'work', type: 'noun'},
-    {root: 'פעל', translate: 'work', type: 'notnoun'}
+    {root: 'מכר', translate: 'sell', type: 'Pa`al'},
+    {root: 'פעל', translate: 'work', type: 'Pa`al'}
   ],
-  types: ['Pa`al', 'Hiph`il', 'Pi`el', 'Hitpael', 'Noun'],
   title: ['ROOT', 'TRANSLATE', 'TYPE', 'PRESENT', 'PAST', 'FUTURE']
 }
 
