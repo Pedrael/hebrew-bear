@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom';
 import classes from '../../styles/index.module.css';
 
 import Word from '../../models/Words.js';
-import { conjugatePresent } from './ConjugateFunctions';
+import { conjugatePresent, conjugatePast } from './ConjugateFunctions';
 
 const Conjugation = () => {
 
     const word = new Word('פעל', 'work', 'Pa`al');
     
     const {tense, root, type} = useParams();
-    const result = conjugatePresent(root, type);
+    const result = conjugatePast(root, type);
 
     return (
         <table className={classes.table}>

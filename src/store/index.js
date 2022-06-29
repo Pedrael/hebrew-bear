@@ -17,6 +17,9 @@ const defaultState = {
   verbs: [
     {root: 'פעל', translate: 'work', type: 'noun'},
     {root: 'מכר', translate: 'sell', type: 'Pa`al'},
+    {root: 'מכר', translate: 'sell', type: 'Pi`el'},
+    {root: 'מכר', translate: 'sell', type: 'Hiph`il'},
+    {root: 'מכר', translate: 'sell', type: 'Hitpael'},
     {root: 'פעל', translate: 'work', type: 'Pa`al'}
   ],
   title: ['ROOT', 'TRANSLATE', 'TYPE', 'PRESENT', 'PAST', 'FUTURE']

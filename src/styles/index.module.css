@@ -3,6 +3,7 @@
     border-collapse: separate;
     width: 100%;
     height: min-content;
+    font-size: 32px;
 }
 
 .table tr {
