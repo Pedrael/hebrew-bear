@@ -1,7 +1,14 @@
 const path = require('path');
 
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const isDev = require('electron-is-dev');
+
+const knex = require("knex")({
+	client: "sqlite3",
+	connection: {
+		filename: path.join(__dirname, 'db.sqlite3')
+	}
+});
 
 function createWindow() {
   // Create the browser window.
@@ -44,4 +51,11 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
+
+  ipcMain.on("mainWindowLoaded", function () {
+		let result = knex.select("FirstName").from("User")
+		result.then(function(rows){
+			mainWindow.webContents.send("resultSent", rows);
+		})
+	});
 });

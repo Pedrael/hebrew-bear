@@ -13,7 +13,21 @@ const Conjugation = () => {
     const word = new Word('פעל', 'work', 'Pa`al');
     
     const {tense, root, type} = useParams();
-    const result = conjugatePast(root, type);
+    const result = [];
+
+    switch(tense) {
+        case 'present':
+            result.push(...conjugatePresent(root, type));
+        break;
+        case 'past':
+            result.push(...conjugatePast(root, type));
+        break;
+        case 'future':
+            result.push(...conjugatePast(root, type));
+        break;
+        default:
+        break;
+    }
 
     return (
         <table className={classes.table}>
@@ -31,7 +45,7 @@ const Conjugation = () => {
             </tbody>
             <tfoot>
             <tr>
-                <td><Link to="/">Back</Link></td>
+                <td><Link to="/" className={classes.button}>Back</Link></td>
             </tr>
             </tfoot>
         </table> 

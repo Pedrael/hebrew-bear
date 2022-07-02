@@ -7,10 +7,11 @@ import { Link } from 'react-router-dom';
 import classes from '../../styles/index.module.css';
 
 import Word from '../../models/Words.js';
-import {addVerbAction} from '../../store/index.js';
+import {addVerbAction, removeVerbAction} from '../../store/index.js';
 
 import Button from "../../components/button/Button.jsx";
 import Input from "../../components/input/Input.jsx";
+import Filter from '../../components/filter/Filter';
 
 const Words = () => {
 
@@ -20,9 +21,23 @@ const Words = () => {
   const title = useSelector(state => state.title);
 
   const [wordToAdd, setWord] = useState(new Word('', '', types[0]));
+  const [filter, setFilter] = useState('');
 
   const addWord = () => {
       dispatch(addVerbAction(wordToAdd));
+  }
+
+  const removeWord = (wordToRemove) => {
+      dispatch(removeVerbAction(wordToRemove));
+  }
+
+  const handleFilter = (value) => {
+      setFilter(value);
+  }
+
+  const filterRow = (word) => {
+      if(filter === 'undefined' || filter === '') return true;
+      return word.includes(filter);
   }
 
   return (
@@ -34,25 +49,32 @@ const Words = () => {
                     <th key={key}>{item}</th>
                 ))
             }
+            <th><Filter handleFilter={handleFilter}></Filter></th>
         </tr>
         </thead>
         <tbody>
         {
             verbs.map((row, key) => (
+                filterRow(row.translate)?
                 <tr key={key}>
                     <td>{row.root}</td>
                     <td>{row.translate}</td>
                     <td>{row.type}</td>
                     <td>
-                        {row.type != 'noun' ? <Link to={`/conjugation/present/${row.root}/${row.type}`}>Present</Link> : <></>}
+                        {row.type != 'noun' ? <Link className={classes.button} to={`/conjugation/present/${row.root}/${row.type}`}>Present</Link> : <></>}
                     </td>
                     <td>
-                        {row.type != 'noun' ? <button>Past</button> : <></>}
+                        {row.type != 'noun' ? <Link className={classes.button} to={`/conjugation/past/${row.root}/${row.type}`}>Past</Link> : <></>}
                     </td>
                     <td>
-                        {row.type != 'noun' ? <button>Future</button> : <></>}
+                        {row.type != 'noun' ? <Link className={classes.button} to={`/conjugation/future/${row.root}/${row.type}`}>Future</Link> : <></>}
+                    </td>
+                    <td>
+                        <button className={classes.button} onClick={()=>removeWord(key)}>Remove</button>
                     </td>
                 </tr>
+                :<></>
+                
             ))
         }
         </tbody>
@@ -76,7 +98,8 @@ const Words = () => {
                 </select>
             </td>
             <td></td>
-            <td><button onClick={()=>addWord()}>Add</button></td>
+            <td><button className={classes.button} onClick={()=>addWord()}>Add</button></td>
+            <td></td>
             <td></td>
         </tr>
         </tfoot>

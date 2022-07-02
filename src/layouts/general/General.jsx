@@ -17,6 +17,7 @@ const General = () => {
       <Routes>
         <Route path="" element={<Words></Words>} />
         <Route path="conjugation/:tense/:root/:type" element={<Conjugation></Conjugation>} />
+        <Route path="*" element={<Words></Words>} />
       </Routes>
     </div>
   )
