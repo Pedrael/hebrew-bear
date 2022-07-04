@@ -13,8 +13,8 @@ const defaultState = {
     'Pi`el': 'פִּעֵל',
     'Hitpael': 'הִתְפַּעֵל', 
   },
-  types: ['Pa`al', 'Hiph`il', 'Pi`el', 'Hitpael', 'Noun'],
-  verbs: [
+  types: ['Paal', 'Hiphil', 'Piel', 'Hitpael', 'Noun'],
+  verbs_old: [
     {root: 'פעל', translate: 'work1', type: 'noun'},
     {root: 'מכר', translate: 'sell2', type: 'Pa`al'},
     {root: 'מכר', translate: 'sell3', type: 'Pi`el'},
@@ -22,10 +22,12 @@ const defaultState = {
     {root: 'מכר', translate: 'sell5', type: 'Hitpael'},
     {root: 'פעל', translate: 'work', type: 'Pa`al'}
   ],
+  verbs: [],
   title: ['ROOT', 'TRANSLATE', 'TYPE', 'PRESENT', 'PAST', 'FUTURE']
 }
 
 const ADD_VERB = "ADD_VERB";
+const SET_VERBS = "SET_VERBS";
 const REMOVE_VERB = "REMOVE_VERB";
 
 const reducer = (state = defaultState, action) => {
@@ -33,6 +35,9 @@ const reducer = (state = defaultState, action) => {
 
     case ADD_VERB: {
       return {...state, verbs: [...state.verbs, action.payload] }
+    }
+    case SET_VERBS: {
+      return {...state, verbs: [...action.payload]}
     }
     case REMOVE_VERB: {
       return {...state, verbs: state.verbs.filter((word, index) => index !== action.payload)}
@@ -43,6 +48,7 @@ const reducer = (state = defaultState, action) => {
 }
 
 export const addVerbAction = (payload) => ({type: ADD_VERB, payload});
+export const setVerbsAction = (payload) => ({type: SET_VERBS, payload});
 export const removeVerbAction = (payload) => ({type: REMOVE_VERB, payload});
 
 // const composedEnchancer = compose(applyMiddleware(sagaMiddleware), composeWithDevTools());

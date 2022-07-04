@@ -3,11 +3,17 @@ const path = require('path');
 const { app, BrowserWindow, ipcMain } = require('electron');
 const isDev = require('electron-is-dev');
 
-const knex = require("knex")({
-	client: "sqlite3",
-	connection: {
-		filename: path.join(__dirname, 'db.sqlite3')
-	}
+const sqlite3 = require('sqlite3');
+
+const database = new sqlite3.Database('./public/words.sqlite3', (err) => {
+    if (err) console.error('Database opening error: ', err);
+});
+
+ipcMain.on('asynchronous-message', (event, arg) => {
+    const sql = arg;
+    database.all(sql, (err, rows) => {
+        event.reply('asynchronous-reply', (err && err.message) || rows);
+    });
 });
 
 function createWindow() {
@@ -17,6 +23,7 @@ function createWindow() {
     height: 600,
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false
     },
   });
 

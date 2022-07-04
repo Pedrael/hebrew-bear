@@ -1,13 +1,14 @@
 //import classes from './Words.module.css';
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import classes from '../../styles/index.module.css';
 
 import Word from '../../models/Words.js';
-import {addVerbAction, removeVerbAction} from '../../store/index.js';
+import {addVerbAction, removeVerbAction, setVerbsAction} from '../../store/index.js';
+import { sendAsync } from "../../store/dbmanager";
 
 import Button from "../../components/button/Button.jsx";
 import Input from "../../components/input/Input.jsx";
@@ -24,21 +25,35 @@ const Words = () => {
   const [filter, setFilter] = useState('');
 
   const addWord = () => {
-      dispatch(addVerbAction(wordToAdd));
+      //dispatch(addVerbAction(wordToAdd));
+      sendAsync(`INSERT INTO words (root, translate, type) VALUES ('${wordToAdd.root}', '${wordToAdd.translate}', '${wordToAdd.type}')`);
   }
 
   const removeWord = (wordToRemove) => {
-      dispatch(removeVerbAction(wordToRemove));
+      //dispatch(removeVerbAction(wordToRemove));
+      sendAsync(`DELETE FROM words WHERE id = ${wordToRemove}`);
+  }
+
+  const setWords = (array) => {
+    dispatch(setVerbsAction(array));
   }
 
   const handleFilter = (value) => {
       setFilter(value);
   }
 
+  const getFromDB = () => {
+    sendAsync("SELECT * FROM words").then((result) => setWords(result));
+  }
+
   const filterRow = (word) => {
       if(filter === 'undefined' || filter === '') return true;
       return word.includes(filter);
   }
+
+  useEffect(() => {
+      getFromDB();
+  }, []);
 
   return (
     <table className={classes.table}>
@@ -70,7 +85,7 @@ const Words = () => {
                         {row.type != 'noun' ? <Link className={classes.button} to={`/conjugation/future/${row.root}/${row.type}`}>Future</Link> : <></>}
                     </td>
                     <td>
-                        <button className={classes.button} onClick={()=>removeWord(key)}>Remove</button>
+                        <button className={classes.button} onClick={()=>removeWord(row.id)}>Remove</button>
                     </td>
                 </tr>
                 :<></>
