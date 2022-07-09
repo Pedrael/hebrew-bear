@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import classes from "../../styles/index.module.css";
 
 const Filter = ({handleFilter}) => {
 
@@ -9,7 +10,7 @@ const Filter = ({handleFilter}) => {
     }, [filter]);
 
     return (
-        <input type="text" onChange={(e) => setFilter(e.target.value)}/>
+        <input type="text" className={classes.filterField} onChange={(e) => setFilter(e.target.value)}/>
     )
 }
 

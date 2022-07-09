@@ -26,33 +26,45 @@ const Words = () => {
 
   const addWord = () => {
       //dispatch(addVerbAction(wordToAdd));
-      sendAsync(`INSERT INTO words (root, translate, type) VALUES ('${wordToAdd.root}', '${wordToAdd.translate}', '${wordToAdd.type}')`);
-  }
+      const checkResult = checkInputs();
+      if(checkResult.error) alert(checkResult.error);
+      else {
+          alert(checkResult.ok);
+          sendAsync(`INSERT INTO words (root, translate, type) VALUES ('${wordToAdd.root}', '${wordToAdd.translate}', '${wordToAdd.type}')`);
+      }
+        }
 
   const removeWord = (wordToRemove) => {
       //dispatch(removeVerbAction(wordToRemove));
       sendAsync(`DELETE FROM words WHERE id = ${wordToRemove}`);
   }
 
-  const setWords = (array) => {
+  const setWords = (array) => { // setting words from DB to store
     dispatch(setVerbsAction(array));
   }
 
-  const handleFilter = (value) => {
+  const handleFilter = (value) => { // rerender on filter change
       setFilter(value);
   }
 
-  const getFromDB = () => {
+  const getFromDB = () => { // get form database
     sendAsync("SELECT * FROM words").then((result) => setWords(result));
   }
 
-  const filterRow = (word) => {
+  const filterRow = (word) => { // show words that suit to filter
       if(filter === 'undefined' || filter === '') return true;
       return word.includes(filter);
   }
 
+  const checkInputs = () => { //validate inputs before adding word 
+      if(wordToAdd.root.length === 0) return {error: "Root field cannot be empty!"}
+      if(wordToAdd.root.length < 3 && wordToAdd.type != 'Noun') return {error: "Minimum 3 root letters required"}
+      if(wordToAdd.translate.length === 0) return {error: "Translate field cannot be empty!"}
+      return {ok: "Word added!"}
+  }
+
   useEffect(() => {
-      getFromDB();
+      getFromDB(); // getting from database on startup
   }, []);
 
   return (
@@ -76,13 +88,13 @@ const Words = () => {
                     <td>{row.translate}</td>
                     <td>{row.type}</td>
                     <td>
-                        {row.type != 'noun' ? <Link className={classes.button} to={`/conjugation/present/${row.root}/${row.type}`}>Present</Link> : <></>}
+                        {row.type != 'noun' ? <Link className={classes.button} to={`/conjugation/present/${row.root}/${row.translate}/${row.type}`}>Present</Link> : <></>}
                     </td>
                     <td>
-                        {row.type != 'noun' ? <Link className={classes.button} to={`/conjugation/past/${row.root}/${row.type}`}>Past</Link> : <></>}
+                        {row.type != 'noun' ? <Link className={classes.button} to={`/conjugation/past/${row.root}/${row.translate}/${row.type}`}>Past</Link> : <></>}
                     </td>
                     <td>
-                        {row.type != 'noun' ? <Link className={classes.button} to={`/conjugation/future/${row.root}/${row.type}`}>Future</Link> : <></>}
+                        {row.type != 'noun' ? <Link className={classes.button} to={`/conjugation/future/${row.root}/${row.translate}/${row.type}`}>Future</Link> : <></>}
                     </td>
                     <td>
                         <button className={classes.button} onClick={()=>removeWord(row.id)}>Remove</button>
@@ -95,11 +107,11 @@ const Words = () => {
         </tbody>
         <tfoot>
         <tr>
-            <td><input 
-                type="text" 
+            <td><Input 
+                type="text"
                 onChange = {(e) => setWord(new Word(e.target.value, wordToAdd.translate, wordToAdd.type))}/>
             </td>
-            <td><input 
+            <td><Input 
                 type="text" 
                 onChange = {(e) => setWord(new Word(wordToAdd.root, e.target.value, wordToAdd.type))}/>
             </td>

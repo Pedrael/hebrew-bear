@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
-import classes from './Input.module.css';
+import classes from '../../styles/index.module.css';
 
 const Input = (props) => {
 
   return (
-    <label className={classes.customInput}>
-      {props.name} <input {...props} />
-    </label>
+      <input {...props} className={classes.input}/>
   )
 }
 

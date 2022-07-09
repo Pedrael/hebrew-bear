@@ -12,18 +12,22 @@ const Conjugation = () => {
 
     const word = new Word('פעל', 'work', 'Pa`al');
     
-    const {tense, root, type} = useParams();
+    const {tense, root, translate, type} = useParams();
     const result = [];
+    const signature = [];
 
     switch(tense) {
         case 'present':
-            result.push(...conjugatePresent(root, type));
+            result.push(...Object.values(conjugatePresent(root, type)));
+            signature.push(...Object.keys(conjugatePresent(root, type)));
         break;
         case 'past':
-            result.push(...conjugatePast(root, type));
+            result.push(...Object.values(conjugatePast(root, type)));
+            signature.push(...Object.keys(conjugatePast(root, type)));
         break;
         case 'future':
-            result.push(...conjugatePast(root, type));
+            result.push(...Object.values(conjugatePast(root, type)));
+            signature.push(...Object.keys(conjugatePast(root, type)));
         break;
         default:
         break;
@@ -34,17 +38,19 @@ const Conjugation = () => {
             <thead>
             <tr>
                 <th>{root}</th>
+                <th>{translate}</th>
             </tr>
             </thead>
             <tbody>
             {
-                result.map((word, key) => (
-                    <tr key={key}><td>{word}</td></tr>
+                signature.map((sign, key) => (
+                    <tr key={key}><td>{sign}</td><td>{result[key]}</td></tr>
                 ))
             }
             </tbody>
             <tfoot>
             <tr>
+                <td></td>
                 <td><Link to="/" className={classes.button}>Back</Link></td>
             </tr>
             </tfoot>
