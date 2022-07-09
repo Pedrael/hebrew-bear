@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import classes from '../../styles/index.module.css';
 
 import Word from '../../models/Words.js';
-import { conjugatePresent, conjugatePast } from './ConjugateFunctions';
+import { createInfinitive, conjugatePresent, conjugatePast } from './ConjugateFunctions';
 
 const Conjugation = () => {
 
@@ -15,6 +15,7 @@ const Conjugation = () => {
     const {tense, root, translate, type} = useParams();
     const result = [];
     const signature = [];
+    const infinitive = createInfinitive(root, type).inf;
 
     switch(tense) {
         case 'present':
@@ -38,7 +39,7 @@ const Conjugation = () => {
             <thead>
             <tr>
                 <th>{root}</th>
-                <th>{translate}</th>
+                <th>{infinitive} - {translate}</th>
             </tr>
             </thead>
             <tbody>
