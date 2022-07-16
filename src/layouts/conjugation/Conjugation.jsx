@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import classes from '../../styles/index.module.css';
 
 import Word from '../../models/Words.js';
-import { createInfinitive, conjugatePresent, conjugatePast } from './ConjugateFunctions';
+import { createInfinitive, conjugatePresent, conjugatePast, conjugateFuture } from './ConjugateFunctions';
 
 const Conjugation = () => {
 
@@ -27,8 +27,8 @@ const Conjugation = () => {
             signature.push(...Object.keys(conjugatePast(root, type)));
         break;
         case 'future':
-            result.push(...Object.values(conjugatePast(root, type)));
-            signature.push(...Object.keys(conjugatePast(root, type)));
+            result.push(...Object.values(conjugateFuture(root, type)));
+            signature.push(...Object.keys(conjugateFuture(root, type)));
         break;
         default:
         break;
