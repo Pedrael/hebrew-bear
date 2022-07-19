@@ -13,7 +13,7 @@ const defaultState = {
     'Pi`el': 'פִּעֵל',
     'Hitpael': 'הִתְפַּעֵל', 
   },
-  types: ['Paal', 'Hiphil', 'Piel', 'Hitpael', 'Noun'],
+  types: ['Paal', 'Hiphil', 'Piel', 'Hitpael', 'Nifal', 'Pual', 'Hufal', 'Noun', 'Adjective'],
   verbs_old: [
     {root: 'פעל', translate: 'work1', type: 'noun'},
     {root: 'מכר', translate: 'sell2', type: 'Pa`al'},

@@ -1,4 +1,4 @@
-const vowels = {e: '\u05B5', a: '\u05B7', i: '\u05B4', A: '\u05B8', _e: '\u05B0'}
+const vowels = {e: '\u05B5', a: '\u05B7', i: '\u05B4', A: '\u05B8', _e: '\u05B0', u: '\u05BB', E: '\u05B6'}
 
 export const createInfinitive = (root, binyan) => {
 
@@ -32,30 +32,51 @@ export const conjugatePresent = (root, binyan) => {
         case 'Paal':
             return {
                 'S M': root[0] + 'וֹ' + root[1] + vowels.e + root[2], //e
-                'S F': root[0] + 'וֹ' + root[1] + vowels.e + root[2] + vowels.e + 'ת',
-                'P M': root[0] + 'וֹ' + root[1] + root[2] + vowels.i + 'י' + 'ם',
-                'P F': root[0] + 'וֹ' + root[1] + root[2] + 'וֹ' + 'ת'
+                'S F': root[0] + 'וֹ' + root[1] + vowels.E + root[2] + vowels.E + 'ת',
+                'P M': root[0] + 'וֹ' + root[1] + vowels._e +  root[2] + vowels.i + 'י' + 'ם',
+                'P F': root[0] + 'וֹ' + root[1] + vowels._e + root[2] + 'וֹ' + 'ת'
             } // divide in 3, check root length maybe?
         case 'Piel':
             return {
                 'S M': 'מְ' + root[0] + vowels.a + root[1] + vowels.e + root[2], //ae
-                'S F': 'מְ' + root[0] + vowels.a + root[1] + vowels.e + root[2] + vowels.e + 'ת',
-                'P M': 'מְ' + root[0] + vowels.a + root[1] + root[2] + '\u05B4' + 'י' + 'ם',
-                'P F': 'מְ' + root[0] + vowels.a + root[1] + root[2] + 'וֹ' + 'ת'
+                'S F': 'מְ' + root[0] + vowels.a + root[1] + vowels.E + root[2] + vowels.E + 'ת',
+                'P M': 'מְ' + root[0] + vowels.a + root[1] + vowels._e + root[2] + vowels.i + 'י' + 'ם',
+                'P F': 'מְ' + root[0] + vowels.a + root[1] + vowels._e + root[2] + 'וֹ' + 'ת'
             }
         case 'Hiphil':
             return {
-                'S M': 'מַ' + root[0] + root[1] + vowels.i + 'י' + root[2], // i
-                'S F': 'מַ' + root[0] + root[1] + vowels.i + 'י' + root[2] + vowels.a + 'ה',
-                'P M': 'מַ' + root[0] + root[1] + vowels.i + 'י' + root[2] + vowels.i + 'י' + 'ם',
-                'P F': 'מַ' + root[0] + root[1] + vowels.i + 'י' + root[2] + 'וֹ' + 'ת'
+                'S M': 'מַ' + root[0] + vowels._e + root[1] + vowels.i + 'י' + root[2], // i
+                'S F': 'מַ' + root[0] + vowels._e + root[1] + vowels.i + 'י' + root[2] + vowels.A + 'ה',
+                'P M': 'מַ' + root[0] + vowels._e + root[1] + vowels.i + 'י' + root[2] + vowels.i + 'י' + 'ם',
+                'P F': 'מַ' + root[0] + vowels._e + root[1] + vowels.i + 'י' + root[2] + 'וֹ' + 'ת'
             }
         case 'Hitpael': 
             return {
-                'S M': 'מ' + vowels.i + 'ת' + root[0] + vowels.a + root[1] + vowels.e + root[2], //ae
-                'S F': 'מ' + vowels.i + 'ת' + root[0] + vowels.a + root[1] + vowels.e + root[2]+ vowels.e + 'ת',
-                'P M': 'מ' + vowels.i + 'ת' + root[0] + vowels.a + root[1] + root[2] + vowels.i + 'י' + 'ם',
-                'P F': 'מ' + vowels.i + 'ת' + root[0] + vowels.a + root[1] + root[2] + 'וֹ' + 'ת'
+                'S M': 'מ' + vowels.i + 'ת' + vowels._e + root[0] + vowels.a + root[1] + vowels.e + root[2], //ae
+                'S F': 'מ' + vowels.i + 'ת' + vowels._e + root[0] + vowels.a + root[1] + vowels.E + root[2]+ vowels.E + 'ת',
+                'P M': 'מ' + vowels.i + 'ת' + vowels._e + root[0] + vowels.a + root[1] + vowels._e + root[2] + vowels.i + 'י' + 'ם',
+                'P F': 'מ' + vowels.i + 'ת' + vowels._e + root[0] + vowels.a + root[1] + vowels._e + root[2] + 'וֹ' + 'ת'
+            }
+        case 'Nifal':
+            return {
+                'S M': 'נִ' + root[0] + root[1] + vowels.A + root[2],
+                'S F': 'נִ' + root[0] + root[1] + vowels.E + root[2] + vowels.E + 'ת',
+                'P M': 'נִ' + root[0] + root[1] + vowels.A + root[2] + vowels.i + 'י' + 'ם',
+                'P F': 'נִ' + root[0] + root[1] + vowels.A + root[2] + 'וֹ' + 'ת'
+            }
+        case 'Pual':
+            return {
+                'S M': 'מְ' + root[0] + vowels.u + root[1] + vowels.A + root[2], 
+                'S F': 'מְ' + root[0] + vowels.u + root[1] + vowels.E + root[2] + vowels.E + 'ת',
+                'P M': 'מְ' + root[0] + vowels.u + root[1] + vowels.A + root[2] + vowels.i + 'י' + 'ם',
+                'P F': 'מְ' + root[0] + vowels.u + root[1] + vowels.A + root[2] + 'וֹ' + 'ת'
+            }
+        case 'Hufal':
+            return {
+                'S M': 'מוּ' + root[0] + vowels._e + root[1] + vowels.A + root[2],
+                'S F': 'מוּ' + root[0] + vowels._e + root[1] + vowels.A + root[2] + vowels.E +  'ת',
+                'P M': 'מוּ' + root[0] + vowels._e + root[1] + vowels.A + root[2] + vowels.i + 'י' + 'ם',
+                'P F': 'מוּ' + root[0] + vowels._e + root[1] + vowels.A + root[2] + 'וֹ' + 'ת'
             }
         default:
           return {'root': root};
@@ -113,6 +134,18 @@ export const conjugatePast = (root, binyan) => {
                 'You M P': 'הִת' + root[0] + vowels.a + root[1] + vowels.a + root[2] + 'ת' + vowels.e + 'ם',
                 'You F P': 'הִת' + root[0] + vowels.a + root[1] + vowels.a + root[2] + 'ת' + vowels.e + 'ן',
                 'They': 'הִת' + root[0] + vowels.a + root[1] + root[2] + 'וּ'
+            }
+        case 'Nifal':
+            return {
+                'I': 'נִ' + root[0] + vowels._e + root[1] + vowels.a + root[2] + vowels._e + 'ת'+ vowels.i + 'י',
+                'You F': 'נִ' + root[0] + vowels._e + root[1] + vowels.a + root[2] + vowels._e + 'ת' + vowels._e,
+                'You M': 'נִ' + root[0] + vowels._e + root[1] + vowels.a + root[2] + vowels._e + 'ת' + vowels.A,
+                'He': 'נִ' + root[0] + vowels._e + root[1] + vowels.a + root[2],
+                'She': 'נִ' + root[0] + vowels._e + root[1] + vowels._e + root[2] + vowels.A + 'ה',
+                'We': 'נִ' + root[0] + vowels._e + root[1] + vowels.a + root[2] + vowels._e + 'נ' + 'וּ',
+                'You M P': 'נִ' + root[0] + vowels._e + root[1] + vowels.a + root[2] + vowels._e + 'ת' + vowels.E + 'ם',
+                'You F P': 'נִ' + root[0] + vowels._e + root[1] + vowels.a + root[2] + vowels._e + 'ת' + vowels.E + 'ן',
+                'They': 'נִ' + root[0] + vowels._e + root[1] + vowels._e + root[2] + 'וּ'
             }
         default:
             return {'root': root};
