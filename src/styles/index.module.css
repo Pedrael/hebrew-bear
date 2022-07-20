@@ -1,5 +1,11 @@
 * {
-    font-size: 18px;
+    font-size: 1rem;
+    @import url('https://fonts.googleapis.com/css2?family=Tinos&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=David+Libre&display=swap');
+}
+
+.big * {
+    font-size: 1.5rem;
 }
 
 .table {
@@ -61,4 +67,9 @@
 
 .filterField {
     width: 200px;
+}
+
+.hebrew {
+    /* font-family: 'Tinos', serif; */
+    font-family: 'David Libre', serif;
 }

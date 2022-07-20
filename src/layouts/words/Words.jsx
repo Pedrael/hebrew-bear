@@ -84,7 +84,7 @@ const Words = () => {
             verbs.map((row, key) => (
                 filterRow(row.translate)?
                 <tr key={key}>
-                    <td>{row.root}</td>
+                    <td className={classes.hebrew}>{row.root}</td>
                     <td>{row.translate}</td>
                     <td>{row.type}</td>
                     <td>

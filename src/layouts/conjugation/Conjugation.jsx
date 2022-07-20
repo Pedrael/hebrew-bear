@@ -35,17 +35,17 @@ const Conjugation = () => {
     }
 
     return (
-        <table className={classes.table}>
+        <table className={classes.table + ' ' + classes.big}>
             <thead>
             <tr>
-                <th>{root}</th>
-                <th>{infinitive} - {translate}</th>
+                <th className={classes.hebrew}>{root}</th>
+                <th><span  className={classes.hebrew}>{infinitive}</span> - {translate}</th>
             </tr>
             </thead>
             <tbody>
             {
                 signature.map((sign, key) => (
-                    <tr key={key}><td>{sign}</td><td>{result[key]}</td></tr>
+                    <tr key={key}><td>{sign}</td><td className={classes.hebrew}>{result[key]}</td></tr>
                 ))
             }
             </tbody>
