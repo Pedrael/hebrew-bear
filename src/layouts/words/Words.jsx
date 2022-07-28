@@ -109,6 +109,8 @@ const Words = () => {
         <tr>
             <td><Input 
                 type="text"
+                lang="he" 
+                dir="rtl"
                 onChange = {(e) => setWord(new Word(e.target.value, wordToAdd.translate, wordToAdd.type))}/>
             </td>
             <td><Input 

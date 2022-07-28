@@ -32,7 +32,7 @@
 }
 
 .table td, th {
-    padding: 20px;
+    padding: 1rem;
     text-align: center;
 }
 
@@ -44,29 +44,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 8px;
-    padding: 8px;
+    border-radius: 0.3rem;
+    padding: 0.5rem;
     text-decoration: none;
     color: #000;
     border: 1px solid #6aa364;
     background: #8ee286;
     cursor: pointer;
-    width: 150px;
+    max-width: 150px;
+    width: 100px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .input, .filterField {
-    width: 100px;
+    width: 90%;
+    max-width: 150px;
     border: 1px solid #6aa364;
     background: #e6ffe4;
     border-radius: 8px;
     padding: 4px;
     padding-left: 8px;
-}
-
-.filterField {
-    width: 200px;
 }
 
 .hebrew {

@@ -1,4 +1,4 @@
-const vowels = {e: '\u05B5', a: '\u05B7', i: '\u05B4', A: '\u05B8', _e: '\u05B0', u: '\u05BB', E: '\u05B6'}
+import { vowels } from "./alphabet";
 
 export const createInfinitive = (root, binyan) => {
 

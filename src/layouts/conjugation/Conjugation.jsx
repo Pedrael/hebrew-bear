@@ -7,27 +7,32 @@ import classes from '../../styles/index.module.css';
 
 import Word from '../../models/Words.js';
 import { createInfinitive, conjugatePresent, conjugatePast, conjugateFuture } from './ConjugateFunctions';
+import { normaliseWord } from './alphabet';
 
 const Conjugation = () => {
-
-    const word = new Word('פעל', 'work', 'Pa`al');
     
     const {tense, root, translate, type} = useParams();
     const result = [];
     const signature = [];
-    const infinitive = createInfinitive(root, type).inf;
+    const infinitive = normaliseWord(createInfinitive(root, type).inf);
 
     switch(tense) {
         case 'present':
-            result.push(...Object.values(conjugatePresent(root, type)));
+            Object.values(conjugatePresent(root, type)).forEach(word => {
+                result.push(normaliseWord(word));
+            });
             signature.push(...Object.keys(conjugatePresent(root, type)));
         break;
         case 'past':
-            result.push(...Object.values(conjugatePast(root, type)));
+            Object.values(conjugatePast(root, type)).forEach(word => {
+                result.push(normaliseWord(word));
+            });
             signature.push(...Object.keys(conjugatePast(root, type)));
         break;
         case 'future':
-            result.push(...Object.values(conjugateFuture(root, type)));
+            Object.values(conjugateFuture(root, type)).forEach(word => {
+                result.push(normaliseWord(word));
+            });
             signature.push(...Object.keys(conjugateFuture(root, type)));
         break;
         default:
