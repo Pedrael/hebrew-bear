@@ -13,6 +13,7 @@ import { sendAsync } from "../../store/dbmanager";
 import Button from "../../components/button/Button.jsx";
 import Input from "../../components/input/Input.jsx";
 import Filter from '../../components/filter/Filter';
+import Letter from '../../components/keyboard/Letter';
 
 const Words = () => {
 
@@ -128,7 +129,7 @@ const Words = () => {
             </td>
             <td></td>
             <td><button className={classes.button} onClick={()=>addWord()}>Add</button></td>
-            <td></td>
+            <td><Letter letter="A" /></td>
             <td></td>
         </tr>
         </tfoot>

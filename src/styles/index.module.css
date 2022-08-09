@@ -71,3 +71,17 @@
     /* font-family: 'Tinos', serif; */
     font-family: 'David Libre', serif;
 }
+
+.letter {
+    border: 1px solid #6aa364;
+    background: #e6ffe4;
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    font-weight: 700;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
