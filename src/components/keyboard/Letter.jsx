@@ -1,14 +1,16 @@
 import React from "react";
 import classes from "../../styles/index.module.css";
 
-const Letter = ({letter}) => {
+const Letter = ({letter, input, ...props}) => {
 
     const handleClick = () => {
-        console.log(letter);
+        input.current.focus();
+        input.current.value+=letter;
+        console.log(input.current.value);
     }
 
     return (
-        <div className={classes.letter} onClick={() => handleClick()}>{letter}</div>
+        <div {...props} className={classes.letter} onClick={()=>handleClick()}>{letter}</div>
     )
 }
 

@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {forwardRef} from 'react';
 import classes from '../../styles/index.module.css';
 
-const Input = (props) => {
+const Input = (props, ref) => {
 
   return (
-      <input {...props} className={classes.input}/>
+      <input {...props} ref={ref} className={classes.input}/>
   )
 }
 
-export default Input;
+export default forwardRef(Input);

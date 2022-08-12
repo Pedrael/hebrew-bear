@@ -1,6 +1,6 @@
 //import classes from './Words.module.css';
 
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ import { sendAsync } from "../../store/dbmanager";
 import Button from "../../components/button/Button.jsx";
 import Input from "../../components/input/Input.jsx";
 import Filter from '../../components/filter/Filter';
-import Letter from '../../components/keyboard/Letter';
+import Keyboard from '../../components/keyboard/Keyboard';
 
 const Words = () => {
 
@@ -24,6 +24,8 @@ const Words = () => {
 
   const [wordToAdd, setWord] = useState(new Word('', '', types[0]));
   const [filter, setFilter] = useState('');
+  const [isKeyboard, toggleKeyboard] = useState(false);
+  const hebword = useRef(null);
 
   const addWord = () => {
       //dispatch(addVerbAction(wordToAdd));
@@ -69,6 +71,7 @@ const Words = () => {
   }, []);
 
   return (
+    <>
     <table className={classes.table}>
         <thead>
         <tr>
@@ -112,6 +115,7 @@ const Words = () => {
                 type="text"
                 lang="he" 
                 dir="rtl"
+                ref={hebword}
                 onChange = {(e) => setWord(new Word(e.target.value, wordToAdd.translate, wordToAdd.type))}/>
             </td>
             <td><Input 
@@ -127,13 +131,15 @@ const Words = () => {
                     ))}
                 </select>
             </td>
-            <td></td>
+            <td><button className={classes.button} onClick={()=>toggleKeyboard(!isKeyboard)}>Keyboard</button></td>
             <td><button className={classes.button} onClick={()=>addWord()}>Add</button></td>
-            <td><Letter letter="A" /></td>
+            <td></td>
             <td></td>
         </tr>
         </tfoot>
     </table> 
+    {isKeyboard ? <Keyboard input={hebword}></Keyboard> : <></>}
+    </>
   )
 }
 
