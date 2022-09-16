@@ -4,6 +4,12 @@
     @import url('https://fonts.googleapis.com/css2?family=David+Libre&display=swap');
 }
 
+@media screen and (max-width: 1200px) {
+    * {
+        font-size: 0.8rem;
+    }
+}
+
 .big * {
     font-size: 1.5rem;
 }
@@ -51,8 +57,8 @@
     border: 1px solid #6aa364;
     background: #8ee286;
     cursor: pointer;
-    max-width: 150px;
-    width: 100px;
+    max-width: 8rem;
+    width: 6rem;
     margin-left: auto;
     margin-right: auto;
 }
@@ -62,9 +68,9 @@
     max-width: 150px;
     border: 1px solid #6aa364;
     background: #e6ffe4;
-    border-radius: 8px;
-    padding: 4px;
-    padding-left: 8px;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    padding-left: 0.5rem;
 }
 
 .hebrew {

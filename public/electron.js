@@ -1,9 +1,11 @@
 const path = require('path');
 
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, Menu, MenuItem, screen } = require('electron');
 const isDev = require('electron-is-dev');
 
 const sqlite3 = require('sqlite3');
+
+const template = require('./menu').menuTemplate;
 
 const database = new sqlite3.Database('./public/words.sqlite3', (err) => {
     if (err) console.error('Database opening error: ', err);
@@ -17,10 +19,15 @@ ipcMain.on('asynchronous-message', (event, arg) => {
 });
 
 function createWindow() {
+
+  // Create a window that fills the screen's available work area.
+  const primaryDisplay = screen.getPrimaryDisplay()
+  const { width, height } = primaryDisplay.workAreaSize
+
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: width,
+    height: height,
     icon: __dirname + '/favicon.ico',
     webPreferences: {
       nodeIntegration: true,
@@ -40,6 +47,9 @@ function createWindow() {
     win.webContents.openDevTools({ mode: 'detach' });
   }
 }
+// Create Menu from template
+const menu = Menu.buildFromTemplate([]);
+Menu.setApplicationMenu(menu);
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
