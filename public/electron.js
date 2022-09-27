@@ -11,6 +11,10 @@ const database = new sqlite3.Database('./public/words.sqlite3', (err) => {
     if (err) console.error('Database opening error: ', err);
 });
 
+database.serialize(() => {
+  database.run("CREATE TABLE IF NOT EXISTS Words (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, root TEXT NOT NULL , translate TEXT NOT NULL , type TEXT NOT NULL )");
+});
+
 ipcMain.on('asynchronous-message', (event, arg) => {
     const sql = arg;
     database.all(sql, (err, rows) => {
@@ -60,6 +64,7 @@ app.whenReady().then(createWindow);
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
+  database.close();
   if (process.platform !== 'darwin') {
     app.quit();
   }

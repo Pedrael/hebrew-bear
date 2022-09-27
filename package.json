@@ -29,7 +29,7 @@
     "linux": {
       "category": "education",
       "icon" : "public/logo512.png",
-      "target": ["AppImage", "deb"]
+      "target": ["rpm"]
     }
   },
   "scripts": {

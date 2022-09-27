@@ -60,6 +60,7 @@ const Words = () => {
   }
 
   const checkInputs = () => { //validate inputs before adding word 
+      wordToAdd.root = hebword.current.value;
       if(wordToAdd.root.length === 0) return {error: "Root field cannot be empty!"}
       if(wordToAdd.root.length < 3 && wordToAdd.type != 'Noun') return {error: "Minimum 3 root letters required"}
       if(wordToAdd.translate.length === 0) return {error: "Translate field cannot be empty!"}
@@ -67,7 +68,7 @@ const Words = () => {
   }
 
   useEffect(() => {
-      getFromDB(); // getting from database on startup
+    getFromDB(); // getting from database on startup
   }, []);
 
   return (

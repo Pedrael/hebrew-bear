@@ -6,7 +6,6 @@ const Letter = ({letter, input, ...props}) => {
     const handleClick = () => {
         input.current.focus();
         input.current.value+=letter;
-        console.log(input.current.value);
     }
 
     return (
