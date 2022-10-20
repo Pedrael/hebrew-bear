@@ -23,24 +23,30 @@
   "build": {
     "appId": "com.hebrewbear.app",
     "win": {
-      "icon" : "public/favicon.ico",
-      "target": ["portable"]
+      "icon": "public/favicon.ico",
+      "target": [
+        "portable"
+      ]
     },
     "linux": {
       "category": "education",
-      "icon" : "public/logo512.png",
-      "target": ["rpm"]
+      "icon": "public/logo512.png",
+      "target": [
+        "rpm"
+      ]
     }
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "electron-forge start",
     "build": "react-scripts build",
     "electron-builder": "electron-builder --linux",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "concurrently -k \"BROWSER=none npm start\" \"npm:electron\"",
     "electron": "wait-on tcp:3000 && electron .",
-    "postinstall": "install-app-deps"
+    "postinstall": "install-app-deps",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "eslintConfig": {
     "extends": [
@@ -62,10 +68,9 @@
   },
   "devDependencies": {
     "concurrently": "^7.2.1",
-    "electron": "^19.0.4",
-    "electron-builder": "^23.3.3",
     "electron-is-dev": "^2.0.0",
     "knex": "^2.1.0",
-    "wait-on": "^6.0.1"
+    "wait-on": "^6.0.1",
+    "electron-prebuilt-compile": "19.0.4"
   }
 }
